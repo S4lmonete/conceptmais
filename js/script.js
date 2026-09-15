@@ -1,63 +1,11 @@
-window.addEventListener("scroll", () => {
-
-    const header = document.querySelector("header");
-
-    if(window.scrollY > 50){
-        header.style.background = "#000";
-    } else {
-        header.style.background = "rgba(0,0,0,0.85)";
-    }
-
-});
-
-const menuToggle = document.getElementById("menuToggle");
-const navMenu = document.getElementById("navMenu");
-const overlayMenu = document.getElementById("overlayMenu");
-
-function openMenu(){
-
-    document.body.classList.add("menu-open");
-
-    menuToggle.classList.add("active");
-    navMenu.classList.add("active");
-    overlayMenu.classList.add("active");
-
-}
-
-function closeMenu(){
-
-    document.body.classList.remove("menu-open");
-
-    menuToggle.classList.remove("active");
-    navMenu.classList.remove("active");
-    overlayMenu.classList.remove("active");
-
-}
-
-menuToggle.addEventListener("click", () => {
-
-    if(navMenu.classList.contains("active")){
-        closeMenu();
-    }else{
-        openMenu();
-    }
-
-});
-
-overlayMenu.addEventListener("click", closeMenu);
-
-const navLinks = document.querySelectorAll("nav a");
-
-navLinks.forEach(link => {
-
-    link.addEventListener("click", () => {
-
-        closeMenu();
-
-    });
-
-});
-
-document.getElementById("whatsapp-btn").addEventListener("click", () => {
-    gtag('event', 'whatsapp_click');
-});
+const header=document.querySelector('.site-header'),menuToggle=document.getElementById('menuToggle'),navMenu=document.getElementById('navMenu'),overlayMenu=document.getElementById('overlayMenu');
+const closeMenu=()=>{navMenu.classList.remove('active');menuToggle.classList.remove('active');overlayMenu.classList.remove('active');menuToggle.setAttribute('aria-expanded','false')};
+window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>12));
+menuToggle.addEventListener('click',()=>{const open=navMenu.classList.toggle('active');menuToggle.classList.toggle('active',open);overlayMenu.classList.toggle('active',open);menuToggle.setAttribute('aria-expanded',String(open))});
+overlayMenu.addEventListener('click',closeMenu);document.querySelectorAll('nav a').forEach(link=>link.addEventListener('click',closeMenu));
+const plans={auto:{title:'PROTEÇÃO AUTO',items:['Roubo e furto','Colisão','Perda total','Assistência Auto 24h','Reboque']},autoMais:{title:'PROTEÇÃO AUTO MAIS',items:['Roubo e furto','Colisão','Perda total','Fenômenos da natureza','Assistência Auto 24h','Rastreamento 24h','Proteção para terceiros*']},moto:{title:'PROTEÇÃO MOTO',items:['Roubo e furto','Assistência 24h','Reboque','Opções de proteção para sua moto']}};
+const modal=document.getElementById('planModal'),closeModal=()=>{modal.classList.remove('active');modal.setAttribute('aria-hidden','true')};
+document.querySelectorAll('.plan-detail').forEach(button=>button.addEventListener('click',()=>{const plan=plans[button.dataset.plan];document.getElementById('modalTitle').textContent=plan.title;document.getElementById('modalContent').innerHTML='<ul>'+plan.items.map(item=>'<li>'+item+'</li>').join('')+'</ul><p class="notice">*Coberturas, benefícios, limites e condições variam conforme o plano contratado e regulamento.</p>';modal.classList.add('active');modal.setAttribute('aria-hidden','false')}));
+document.querySelector('.modal-close').addEventListener('click',closeModal);modal.addEventListener('click',event=>{if(event.target===modal)closeModal()});document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMenu();closeModal()}});
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(item=>observer.observe(item));
+document.querySelectorAll('.tracked-whatsapp').forEach(link=>link.addEventListener('click',()=>{if(typeof gtag==='function')gtag('event','whatsapp_click')}));
