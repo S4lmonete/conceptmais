@@ -11,21 +11,23 @@ body { color: var(--ink); font-family: Montserrat, Arial, sans-serif; line-heigh
 a { color: inherit; text-decoration: none; }
 .container { width: min(1120px, 90%); margin: auto; }
 
-/* Header and navigation */
+/* Header e navegação */
 .site-header {
   position: fixed; inset: 0 0 auto; z-index: 30;
   background: #fffffff0; backdrop-filter: blur(12px); transition: box-shadow .2s;
 }
 .site-header.scrolled { box-shadow: 0 3px 16px #20212414; }
+.brand { display: flex; align-items: center; }
 .navbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 82px; }
-.brand img { display: block; width: 195px; height: 60px; object-fit: contain; }
+.logo-main { display: flex; width: 90px; height: 60px; object-fit: contain; }
+.logo-alt { display: flex; width: 300px; height: 300px; align-self: left ; object-fit: contain; }
 nav { display: flex; gap: 19px; }
 nav a { font-size: .8rem; font-weight: 700; }
 nav a:hover { color: var(--red); }
 .menu-toggle { display: none; border: 0; background: none; cursor: pointer; }
 .menu-toggle span { display: block; width: 25px; height: 2px; margin: 5px; background: var(--ink); transition: .2s; }
 
-/* Shared typography and controls */
+/* Tipografia e controles */
 .eyebrow { margin-bottom: 12px; color: var(--red); font-size: .68rem; font-weight: 800; letter-spacing: .18em; }
 h1, h2 { font-family: "Roboto Condensed", Montserrat, sans-serif; line-height: 1.04; letter-spacing: .015em; }
 .btn {
@@ -41,7 +43,7 @@ h1, h2 { font-family: "Roboto Condensed", Montserrat, sans-serif; line-height: 1
 /* Hero */
 .hero {
   position: relative; min-height: 680px; padding-top: 82px; overflow: hidden;
-  background: linear-gradient(100deg, #ffffffdd 25%, #ffffff80 65%, #e5e7e933), url("../assets/concept_fundo.jpeg") center / cover;
+  background: linear-gradient(100deg, #ffffffdd 25%, #ffffff80 65%, #e5e7e933), url("../assets/conceptmais_fundo1.png") center / cover;
 }
 .hero::before {
   content: ""; position: absolute; top: 60px; right: -280px; width: 650px; height: 650px; border: 1px solid #d7192066;
@@ -135,7 +137,8 @@ footer { padding: 55px 0 17px; color: #e8e8e8; background: #0b0b0c; }
 
 @media (max-width: 700px) {
   .navbar { height: 70px; }
-  .brand img { width: 165px; height: 54px; }
+  .logo-main { width: 90px; height: 54px; }
+  .logo-alt { width: 250px; height: 300px; }
   .menu-toggle { display: block; z-index: 32; }
   nav {
     position: fixed; z-index: 31; top: 0; right: -290px; display: flex; flex-direction: column; align-items: flex-start;
